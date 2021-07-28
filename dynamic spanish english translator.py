@@ -59,8 +59,11 @@ while True:
     englishlist = shelveread('dynamictranslatorstorage-english')
     spanishlist = shelveread('dynamictranslatorstorage-spanish')
 
-    print('\nTo retrive an entry, type it. to define an entry, type spanishword = englishword')
+    print('Type below. for a full list of functions run -help')
     inp = input('> ')
+
+    print('')
+
     if '=' in inp:
         
         inp = inp.replace(' = ',' ')
@@ -80,22 +83,61 @@ while True:
             i = 0
             content = ''
 
-            while content != inp:
-                content = englishlist[i]
-                i += 1
+            try:
+
+                while True:
+
+                    while content != inp:
+                        content = englishlist[i]
+                        i += 1
+                    
+                    content = ''
             
-            print(spanishlist[i-1])
+                    print(spanishlist[i-1])
+
+            except:
+                blank = ''
 
         elif inp in spanishlist:
             
             i = 0
             content = ''
 
-            while content != inp:
-                content = spanishlist[i]
-                i += 1
-            
-            print(englishlist[i-1])
+            try:
+
+                while True:
+
+                    while content != inp:
+                        content = spanishlist[i]
+                        i += 1
+
+                    content = ''
+                    
+                    print(englishlist[i-1])
+
+            except:
+                blank = ''
+
+        elif inp == '-list':
+            try:
+
+                i = 0
+                print('English                  Spanish\n')
+
+                while True:
+                    print(str(englishlist[i])+(25-len(str(englishlist[i])))*' '+str(spanishlist[i]))
+
+                    i += 1
+
+            except:
+                blank = ''
+
+            print('\nnumber of entries = ',i)
+
+        elif inp == '-help':
+            print('\nTo retrive an entry, type it')
+            print('To define an entry, type two words with = between them')
+            print('To print the list run -list')
         
         else:
             print('entry not found')
